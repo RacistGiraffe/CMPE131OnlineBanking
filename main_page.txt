@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><title>Page Title</title>
+<style>
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+input[type=Submit]:hover {
+    background-color: #45a049;
+    width:12.5em;
+    height:2em;
+}		
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    color: grey;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+   
+}
+
+
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+</style>
+</head>
+
+<body>
+
+	<div class="container">
+	<img src="pic.jpg" alt="Snow" style="width:100%;">
+
+<div class="bottom-left"> Left
+
+</div>
+
+<div class="top-left">
+	<h1>Bank of America</h1>
+	<img src="logo.jpg" alt="Snow" style="width:100%;">
+</div>
+
+
+<div class="top-right">
+<form>
+<h3>Already a Member?</h3>
+    <input type="text" id="UID" name="UserId" placeholder="User Id. . ."></br>
+    <input type="text" id="PWD" name="lastname" placeholder="password. . ."></br>
+    <input type="submit" id="submit" value="Submit" class="submit" /></br>
+<a href="https://www.google.com/">Open an account</a>
+</form>
+</div>
+
+
+
+</body>
+</html>
