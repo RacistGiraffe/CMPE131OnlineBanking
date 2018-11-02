@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head><title>Bank of SJ State</title>
+<style>
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+input[type=Submit]:hover {
+    background-color: #45a049;
+    width:12.5em;
+    height:2em;
+}		
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    color: grey;
+    border-radius: 4px;
+    background-color: #3eb8e0;
+   
+}
+
+
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+</style>
+</head>
+
+<body>
+
+	<div class="container">
+	<img src="pic.jpg" alt="Snow" style="width:100%;">
+
+<div class="bottom-left"> Left
+
+</div>
+
+<div class="top-left">
+	
+</div>
+
+
+<div class="top-right">
+<form>
+<h2>Already a Member?</h2>
+    <input type="text" id="UID" name="UserId" placeholder="User Id. . ."></br>
+    <input type="text" id="PWD" name="lastname" placeholder="password. . ."></br>
+    <input type="submit" id="submit" value="Submit" class="submit" /></br>
+<p><h4>Not a Member?</h4><a href="create_account.html">Open an account</a>
+</p>
+<p> <b><u>Contact Information</b></u></p>
+<p> Phone: 1-800- xxx-xxxx</br>
+Email: sjsubankteam2@sjsu.edu
+</form>
+</div>
+
+
+
+</body>
+</html>
