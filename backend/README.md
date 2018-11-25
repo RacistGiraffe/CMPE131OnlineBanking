@@ -1,7 +1,9 @@
 *This is the entire project with backend touches*
 
-Backend isn't completely finished yet. The login system works perfectly fine. Some HTML files got their styling connected to a  
-seperate CSS file.
+Backend almost finished, just a few syntax errors. The login system works perfectly fine. Some HTML files got their styling connected to a  seperate CSS file.
+
+*Frontend needs to implement two new html stylings for home.php and accounsettings.php
+    + please indicate if data from database is needed to be shown so I can implement that
 
 All folders in here are required to run the code. 
 
@@ -12,7 +14,7 @@ For this to run locally on your computer:
 3) Head to localhost:/yourFolderName/header.php
 
 *NOTE*
-As of 11/13/2018, you will need to manually create your own database "onlinebanking" with table "users" in PHPmyAdmin
+As of 11/25/2018, you will need to manually create your own database "onlinebanking" with table "users" in PHPmyAdmin
     --> consists of five columns idUsers, uidUsers, emailUsers, pwdUsers, balanceUsers
 // Will be fixed once balances have been implemented
 
