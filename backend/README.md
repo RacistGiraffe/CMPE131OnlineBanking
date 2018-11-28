@@ -14,9 +14,7 @@ For this to run locally on your computer:
 3) Head to localhost:/yourFolderName/header.php
 
 *NOTE*
-As of 11/25/2018, you will need to manually create your own database "onlinebanking" with table "users" in PHPmyAdmin
-    --> consists of five columns idUsers, uidUsers, emailUsers, pwdUsers, balanceUsers
-// Will be fixed once balances have been implemented
+As of 11/28/2018, the database is automatically created if not already existing ||: weird syntax errors stopping from balances working properly
 
 Temp text files serve only one purpose: to allow for the creation of folders.
 
