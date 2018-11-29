@@ -41,7 +41,7 @@ if (isset($_POST['login-submit'])){
                     $_SESSION['userId'] = $row['idUsers']; # store information of the users
                     $_SESSION['userUid'] = $row['uidUsers'];
 
-                    header("Location: ../mainpage.php?login=success");
+                    header("Location: ../pages/home.php?login=success");
                     exit();                    
                 } else {
                     # incase pwdCheck fails
