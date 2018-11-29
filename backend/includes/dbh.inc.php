@@ -30,7 +30,8 @@ while ($dbAndTableCreated == FALSE) {
                 uidUsers varchar(256) not null,
                 emailUsers varchar(256) not null,
                 pwdUsers varchar(256) not null,
-                balanceUsers decimal(10,2) not null
+                balanceUsers decimal(10,2) not null,
+                balanceTwoUsers decimal(10,2) not null
             );";
             if (mysqli_query($conn, $sqlCreateTable) === FALSE) {
                 echo "Error creating table: " . mysqli_error($conn);
@@ -46,7 +47,4 @@ $conn = mysqli_connect($servername, $dbUsername, $dbPassword, $dbName);
 if (!$conn){
     die("connection failed: ".mysqli_connect_error());
 }
-
-# connect to the database
-
 
