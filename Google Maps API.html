@@ -16,33 +16,26 @@
         margin: 0;
         padding: 0;
       }
-				</style>
-				<script>
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      var map;
-      var infowindow;
-
-
-      function initMap() {
+</style>
+<script>
+	var map;
+	var infowindow;
+	  
+	function initMap() {
 		//Boilerplate to set up default map
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
+          center: {lat: 37.335480, lng: -121.893028},
           zoom: 15
         });
         infoWindow = new google.maps.InfoWindow;
-
-		//After being granted access to location services, it will go to this
-		// Try HTML5 geolocation.
-        if (navigator.geolocation) {
+		
+		//After being granted access to location services, it will use geolocation to center the map to the current location
+        /*if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
             infoWindow.setPosition(pos);
             infoWindow.setContent('Current Location.');
             infoWindow.open(map);
@@ -53,46 +46,68 @@
         } else {
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
-        }
+        }*/
+		
+		if (navigator.geolocation) 
+    {
+       navigator.geolocation.getCurrentPosition(function(position) 
+       {
+            pos = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 
+            infowindow = new google.maps.InfoWindow({map: map,position: pos,content: 'You Are Here'});
 
+            var request = {location:pos,radius:50000,keyword: 'Chase ATM'};
+
+            map.setCenter(pos);
+
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch(request,callback);
+
+        }, 
+
+        function() 
+        { 
+        handleNoGeolocation(true);
+        });
+    } 
+    else 
+    {
+    handleNoGeolocation(false);
+    }
+		
+		/*//Create "request" and use it to find nearby ATMs and pin markers on them
 		var request = {
-    location: map.getCenter(),
-    radius: '500',
-    query: 'Chase ATM San Jose'
-  };
-
-  var service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
-
-      }
-
-
-
-
+			location: pos,
+			radius: '500',
+			query: 'Chase ATM'
+		};
+		
+		var service = new google.maps.places.PlacesService(pos);
+		service.nearbySearch(request, callback);*/
+	}
+	
+	
 		function callback(results, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 			for (var i = 0; i < results.length; i++) {
-		var place = results[i];
-		createMarker(results[i]);
-    }
-  }
-}
-
-
+			var place = results[i];
+			createMarker(results[i]);
+				}
+			}
+		}
+		
        function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location
         });
-
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);
         });
       }
-
 	  //Function error, can ignore
 	  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
