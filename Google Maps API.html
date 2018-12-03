@@ -74,11 +74,15 @@
           width: auto;
         }
       }
+	  
+	  
 				</style>
-				 <div id="right-panel"></div>
-    <div id="map"></div>
+				<body>
+				
+				
+					<div id="right-panel"></div>
+					<div id="map"></div>
 				<script>
-				//https://developers.google.com/maps/documentation/javascript/examples/directions-panel
 	var map;
 	var infowindow;
 	var directionsDisplay;
@@ -96,8 +100,6 @@
 		directionsService = new google.maps.DirectionsService();
 
 		//After being granted access to location services, it will use geolocation to center the map to the current location
-
-
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) 
 				{
@@ -118,9 +120,7 @@
 			function() { 
 				handleNoGeolocation(true);
 			});
-
 		}
-
 		else {
 			handleNoGeolocation(false);
 		}
@@ -156,15 +156,16 @@
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
+          } 
+		  else {
+				window.alert('Directions request failed due to ' + status);
+			}
+			});
 		}
 
-						</script>
+		</script>
 					</head>
-					<body>
+					
 						<div id="map"/>
 						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm454_Wl6l2VhNa-LfRVEQXq38j3cdpS8&libraries=places&callback=initMap" async defer/></script>
 				</body>
