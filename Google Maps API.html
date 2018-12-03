@@ -16,38 +16,88 @@
         margin: 0;
         padding: 0;
       }
-</style>
-<div>
-<strong>Mode of Travel: </strong>
-<select id="mode" onchange="calcRoute();">
-  <option value="DRIVING">Driving</option>
-  <option value="WALKING">Walking</option>
-  <option value="BICYCLING">Bicycling</option>
-  <option value="TRANSIT">Transit</option>
-</select>
-</div>
-<script>
-	//var markers = [];
+	  #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      #right-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
+      }
+      #map {
+        margin-right: 400px;
+      }
+      #floating-panel {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+      @media print {
+        #map {
+          height: 500px;
+          margin: 0;
+        }
+        #right-panel {
+          float: none;
+          width: auto;
+        }
+      }
+				</style>
+				 <div id="right-panel"></div>
+    <div id="map"></div>
+				<script>
+				//https://developers.google.com/maps/documentation/javascript/examples/directions-panel
 	var map;
 	var infowindow;
-	var count2 = 0;
 	var directionsDisplay;
 	var directionsService;
-	
-		  
+
+
 	function initMap() {
 		//Boilerplate to set up default map
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 37.335480, lng: -121.893028},
-          zoom: 17
+          zoom: 14
         });
         infoWindow = new google.maps.InfoWindow;
 		directionsDisplay = new google.maps.DirectionsRenderer();
 		directionsService = new google.maps.DirectionsService();
-		
+
 		//After being granted access to location services, it will use geolocation to center the map to the current location
-        
-		
+
+
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) 
 				{
@@ -56,6 +106,8 @@
             var request = {location:pos,radius:2500,keyword: 'Chase ATM'};
             map.setCenter(pos);
 			directionsDisplay.setMap(map);
+			directionsDisplay.setPanel(document.getElementById('right-panel'));
+			
 
 			//Create "request" and use it to find nearby ATMs and pin markers on them
             infowindow = new google.maps.InfoWindow();
@@ -66,15 +118,14 @@
 			function() { 
 				handleNoGeolocation(true);
 			});
-			
+
 		}
 
 		else {
 			handleNoGeolocation(false);
 		}
 	}
-	  
-	 
+
 		function callback(results, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 			for (var i = 0; i < results.length; i++) {
@@ -83,7 +134,7 @@
 				}
 			}
 		}
-		
+
        function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
@@ -94,29 +145,27 @@
 			calcRoute(event.latLng);
         });
       }
-	  
-	  
-	  function calcRoute(location) {
-	  var selectedMode = document.getElementById('mode').value;
-		var start = pos;
-		var end = location;
-		var request = {
-			origin:start,
-			destination:end,
-			travelMode: google.maps.TravelMode[selectedMode]
-		};
-		directionsService.route(request, function(response, status) {
-				if (status == 'OK') {
-					directionsDisplay.setDirections(response);
-				}
-			});
-		}
-	  
-							</script>
-						</head>
-						<body>
-							<div id="map"/>
-							<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm454_Wl6l2VhNa-LfRVEQXq38j3cdpS8&libraries=places&callback=initMap" async defer></script>
 
-						</body>
-					</html>
+	  function calcRoute(location) {
+		var start = pos;
+        var end = location;
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+		}
+
+						</script>
+					</head>
+					<body>
+						<div id="map"/>
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDm454_Wl6l2VhNa-LfRVEQXq38j3cdpS8&libraries=places&callback=initMap" async defer/></script>
+				</body>
+			</html>
