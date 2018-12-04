@@ -34,15 +34,12 @@
         line-height: 30px;
         padding-left: 10px;
       }
-
       #right-panel select, #right-panel input {
         font-size: 15px;
       }
-
       #right-panel select {
         width: 100%;
       }
-
       #right-panel i {
         font-size: 12px;
       }
@@ -75,91 +72,18 @@
         }
       }
 	  
-	  .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-        font-family: Roboto;
-      }
-
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
-
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
-
-      .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
-
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
-
-      #title {
-        color: #fff;
-        background-color: #4d90fe;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-	  
 	  
 				</style>
 				<body>
-				 <div class="pac-card" id="pac-card">
-      <div>
-        <div id="title">
-          Autocomplete search
-        </div>
-		
-		
-        
-        
-      </div>
-      <div id="pac-container">
-        <input id="pac-input" type="text"
-            placeholder="Enter a starting location (leave blank for current position)">
-      </div>
-    </div>
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <img src="" width="16" height="16" id="place-icon">
-      <span id="place-name"  class="title"></span><br>
-      <span id="place-address"></span>
-    </div>
+				
+				
 					<div id="right-panel"></div>
 					<div id="map"></div>
-<script>
+				<script>
 	var map;
 	var infowindow;
 	var directionsDisplay;
 	var directionsService;
-	var place;
-	var places;
-
-
 	function initMap() {
 		//Boilerplate to set up default map
         map = new google.maps.Map(document.getElementById('map'), {
@@ -169,7 +93,6 @@
         infoWindow = new google.maps.InfoWindow;
 		directionsDisplay = new google.maps.DirectionsRenderer();
 		directionsService = new google.maps.DirectionsService();
-
 		//After being granted access to location services, it will use geolocation to center the map to the current location
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) 
@@ -181,13 +104,11 @@
 			directionsDisplay.setMap(map);
 			directionsDisplay.setPanel(document.getElementById('right-panel'));
 			
-
 			//Create "request" and use it to find nearby ATMs and pin markers on them
             infowindow = new google.maps.InfoWindow();
             var service = new google.maps.places.PlacesService(map);
             service.nearbySearch(request,callback);
 				}, 
-
 			function() { 
 				handleNoGeolocation(true);
 			});
@@ -195,21 +116,7 @@
 		else {
 			handleNoGeolocation(false);
 		}
-		var input = document.getElementById('pac-input');
-		var autocomplete = new google.maps.places.Autocomplete(input);
-		
-		autocomplete.addListener('place_changed', function() {
-          place = autocomplete.getPlace();
-		  places = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-		})
 	}
-
 		function callback(results, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 			for (var i = 0; i < results.length; i++) {
@@ -218,7 +125,6 @@
 				}
 			}
 		}
-
        function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
@@ -229,13 +135,8 @@
 			calcRoute(event.latLng);
         });
       }
-
 	  function calcRoute(location) {
-	  var start;
-	  if(!places)
-		start = pos;
-		else
-		start = places;
+		var start = pos;
         var end = location;
         directionsService.route({
           origin: start,
@@ -250,7 +151,6 @@
 			}
 			});
 		}
-
 		</script>
 					</head>
 					
